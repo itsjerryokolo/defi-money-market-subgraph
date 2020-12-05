@@ -15,7 +15,7 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - dmgApproval
-        - dmgTrade
+        - dmgTransfer
       abis:
         - name: DMMToken
           file: ./abis/DMMToken.json
@@ -43,7 +43,7 @@ dataSources:
       entities:
         - mDaiMint
         - mDaiRedeem
-        - mDaiTrade
+        - mDaiTransfer
       abis:
         - name: mDai
           file: ./abis/mDai.json
@@ -69,7 +69,7 @@ dataSources:
       entities:
         - mUSDCMinted
         - mUSDCRedeemed
-        - mUSDCTrade
+        - mUSDCTransfer
       abis:
         - name: mUSDC
           file: ./abis/mUSDC.json
@@ -81,3 +81,29 @@ dataSources:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleMUSDCTransfer 
       file: ./src/mapping.ts      
+  - kind: ethereum/contract
+    name: mETH
+    network: mainnet
+    source:
+      address: "0xdF9307DFf0a1B57660F60f9457D32027a55ca0B2"
+      abi: mETH
+      startBlock: 9737557 
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - mETHMinted
+        - mETHRedeemed
+        - mETHTransfer
+      abis:
+        - name: mETH
+          file: ./abis/mETH.json
+      eventHandlers:
+        - event: Mint(indexed address,indexed address,uint256)
+          handler: handleMETHMint
+        - event: Redeem(indexed address,indexed address,uint256)
+          handler: handleMETHRedeem 
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleMETHTransfer 
+      file: ./src/mapping.ts   
