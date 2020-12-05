@@ -16,21 +16,18 @@ import {
   Mint,
   Redeem
 } from "../generated/mUSDC/mUSDC"
+import {
+  mETH,
+  Mint,
+  Redeem
+} from "../generated/mETH/mETH"
 
 
-import { dmgApproval, dmgTrade,  } from "../generated/schema"
-import {mDaiMint, mDaiRedeem, mDaiTrade } from "../generated/schema"
-import {mUSDCMint, mUSDCRedeem, mUSDCTrade} from "../generated/schema"
+import { dmgApproval, dmgTransfer,  } from "../generated/schema"
+import {mDaiMint, mDaiRedeem, mDaiTransfer } from "../generated/schema"
+import {mUSDCMint, mUSDCRedeem, mUSDCTransfer} from "../generated/schema"
+import {mETHMint, mETHRedeem, mETHTransfer} from "../generated/schema"
 
-export function handleApproval(event: Approval): void {
-let dmgapproval = new dmgApproval(event.transaction.hash.toHex())
-dmgapproval.amountApproved = event.transaction.value
-dmgapproval.ownerAddress = event.params.owner
-dmgapproval.spenderAddress = event.params.spender
-dmgapproval.transactionBlock = event.block.number
-dmgapproval.save()
-
-}
   //  Entities can be loaded from the store using a string ID; this ID
   //  needs to be unique across all entities of the same type
   // let entity = ExampleEntity.load(event.transaction.from.toHex())
@@ -95,23 +92,31 @@ dmgapproval.save()
   // - contract.transferFrom(...)
 
 
-export function handleDelegateChanged(event: DelegateChanged): void {
+export function handleDelegateChanged(event: DelegateChanged): void {}
+export function handleDelegateVotesChanged(event: DelegateVotesChanged): void {}
 
-}
-
-export function handleDelegateVotesChanged(event: DelegateVotesChanged): void {
-
-}
+export function handleApproval(event: Approval): void {
+  let dmgapproval = new dmgApproval(event.transaction.hash.toHex())
+  dmgapproval.amountApproved = event.transaction.value
+  dmgapproval.ownerAddress = event.params.owner
+  dmgapproval.spenderAddress = event.params.spender
+  dmgapproval.transactionDate = event.block.timestamp
+  dmgapproval.transactionBlock = event.block.number
+  dmgapproval.save()
+  }
 export function handleTransfer(event: Transfer): void {
     //    Entity fields can be set using simple assignments
     //   entity.count = BigInt.fromI32(0)
-    let dmgtrade = new dmgTrade(event.transaction.hash.toHex()) 
-    dmgtrade.transferedFrom= event.params.from
-    dmgtrade.transferedTo = event.params.to
-    dmgtrade.amountTransfered = event.transaction.value
-    dmgtrade.transactionDate = event.block.timestamp
-    dmgtrade.transactionBlock = event.block.number
-    dmgtrade.save()
+    let dmgtransfer = new dmgTransfer(event.transaction.hash.toHex())
+    let contract = DMMToken.bind(event.address)     
+    dmgtransfer.transferedFrom= event.params.from
+    dmgtransfer.transferedTo = event.params.to
+    dmgtransfer.symbol = contract.symbol()
+    dmgtransfer.amountTransfered = event.transaction.value
+    dmgtransfer.totalSupply = contract.totalSupply()
+    dmgtransfer.transactionDate = event.block.timestamp
+    dmgtransfer.transactionBlock = event.block.number
+    dmgtransfer.save()
 }
 
 export function handleMDAIMint (event: Mint): void{
@@ -144,9 +149,11 @@ export function handleMDAIRedeem (event: Redeem): void{
 }
 
 export function handleMDAITransfer (event: Transfer): void{
-    let mdaiTrade = new mDaiTrade(event.transaction.hash.toHex()) 
+    let mdaiTrade = new mDaiTransfer(event.transaction.hash.toHex())
+    let contract = mDai.bind(event.address) 
     mdaiTrade.transferedFrom= event.params.from
     mdaiTrade.transferedTo = event.params.to
+    mdaiTrade.symbol =  contract.symbol()
     mdaiTrade.amountTransfered = event.transaction.value
     mdaiTrade.transactionDate = event.block.timestamp
     mdaiTrade.transactionBlock = event.block.number
@@ -182,11 +189,53 @@ export function handleMUSDCMint (event: Mint): void{
       musdcRedeem.save() 
   }
   export function handleMUSDCTransfer (event: Transfer): void{
-      let musdcTrade = new mUSDCTrade(event.transaction.hash.toHex())
+      let musdcTrade = new mUSDCTransfer(event.transaction.hash.toHex())
+      let contract = mUSDC.bind(event.address)
+      musdcTrade.symbol =  contract.symbol()
       musdcTrade.transferedFrom= event.params.from
       musdcTrade.transferedTo = event.params.to
       musdcTrade.amountTransfered = event.transaction.value
       musdcTrade.transactionDate = event.block.timestamp
       musdcTrade.transactionBlock = event.block.number
       musdcTrade.save()
+  }
+
+  export function handleMETHMint (event: Mint): void{
+    let methMint = new mETHMint(event.transaction.hash.toHex())
+    let contract = mETH.bind(event.address)
+    methMint.minterAddress = event.params.minter
+    methMint.recipientAddress = event.params.recipient
+    methMint.amountMinted = event.params.amount
+    methMint.tokenAddress = contract._address
+    methMint.symbol =  contract.symbol()
+    methMint.totalSupply = contract.totalSupply()
+    methMint.transactionDate = event.block.timestamp
+    methMint.transactionBlock = event.block.number
+    methMint.save()
+  }
+  
+  
+  export function handleMETHRedeem (event: Redeem): void{
+      let methRedeem = new mUSDCRedeem(event.transaction.hash.toHex())
+      let contract = mETH.bind(event.address)
+      methRedeem.redeemerAddress = event.params.redeemer
+      methRedeem.recipientAddress = event.params.recipient
+      methRedeem.amountRedeemed = event.params.amount
+      methRedeem.tokenAddress = contract._address
+      methRedeem.symbol =  contract.symbol()
+      methRedeem.totalSupply = contract.totalSupply()
+      methRedeem.transactionDate = event.block.timestamp
+      methRedeem.transactionBlock = event.block.number
+      methRedeem.save() 
+  }
+  export function handleMETHTransfer (event: Transfer): void{
+      let methTrade = new mETHTransfer(event.transaction.hash.toHex())
+      let contract = mETH.bind(event.address)
+      methTrade.symbol =  contract.symbol()
+      methTrade.transferedFrom= event.params.from
+      methTrade.transferedTo = event.params.to
+      methTrade.amountTransfered = event.transaction.value
+      methTrade.transactionDate = event.block.timestamp
+      methTrade.transactionBlock = event.block.number
+      methTrade.save()
   }
