@@ -69,6 +69,15 @@ export class dmgApproval extends Entity {
     this.set("spenderAddress", Value.fromBytes(value));
   }
 
+  get transactionDate(): BigInt {
+    let value = this.get("transactionDate");
+    return value.toBigInt();
+  }
+
+  set transactionDate(value: BigInt) {
+    this.set("transactionDate", Value.fromBigInt(value));
+  }
+
   get transactionBlock(): BigInt {
     let value = this.get("transactionBlock");
     return value.toBigInt();
@@ -79,7 +88,7 @@ export class dmgApproval extends Entity {
   }
 }
 
-export class dmgTrade extends Entity {
+export class dmgTransfer extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -87,17 +96,17 @@ export class dmgTrade extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save dmgTrade entity without an ID");
+    assert(id !== null, "Cannot save dmgTransfer entity without an ID");
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save dmgTrade entity with non-string ID. " +
+      "Cannot save dmgTransfer entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("dmgTrade", id.toString(), this);
+    store.set("dmgTransfer", id.toString(), this);
   }
 
-  static load(id: string): dmgTrade | null {
-    return store.get("dmgTrade", id) as dmgTrade | null;
+  static load(id: string): dmgTransfer | null {
+    return store.get("dmgTransfer", id) as dmgTransfer | null;
   }
 
   get id(): string {
@@ -107,6 +116,15 @@ export class dmgTrade extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
+  }
+
+  get symbol(): string {
+    let value = this.get("symbol");
+    return value.toString();
+  }
+
+  set symbol(value: string) {
+    this.set("symbol", Value.fromString(value));
   }
 
   get transferedFrom(): Bytes {
@@ -134,6 +152,15 @@ export class dmgTrade extends Entity {
 
   set amountTransfered(value: BigInt) {
     this.set("amountTransfered", Value.fromBigInt(value));
+  }
+
+  get totalSupply(): BigInt {
+    let value = this.get("totalSupply");
+    return value.toBigInt();
+  }
+
+  set totalSupply(value: BigInt) {
+    this.set("totalSupply", Value.fromBigInt(value));
   }
 
   get transactionDate(): BigInt {
@@ -361,7 +388,7 @@ export class mDaiRedeem extends Entity {
   }
 }
 
-export class mDaiTrade extends Entity {
+export class mDaiTransfer extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -369,17 +396,17 @@ export class mDaiTrade extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save mDaiTrade entity without an ID");
+    assert(id !== null, "Cannot save mDaiTransfer entity without an ID");
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save mDaiTrade entity with non-string ID. " +
+      "Cannot save mDaiTransfer entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("mDaiTrade", id.toString(), this);
+    store.set("mDaiTransfer", id.toString(), this);
   }
 
-  static load(id: string): mDaiTrade | null {
-    return store.get("mDaiTrade", id) as mDaiTrade | null;
+  static load(id: string): mDaiTransfer | null {
+    return store.get("mDaiTransfer", id) as mDaiTransfer | null;
   }
 
   get id(): string {
@@ -389,6 +416,15 @@ export class mDaiTrade extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
+  }
+
+  get symbol(): string {
+    let value = this.get("symbol");
+    return value.toString();
+  }
+
+  set symbol(value: string) {
+    this.set("symbol", Value.fromString(value));
   }
 
   get transferedFrom(): Bytes {
@@ -643,7 +679,7 @@ export class mUSDCRedeem extends Entity {
   }
 }
 
-export class mUSDCTrade extends Entity {
+export class mUSDCTransfer extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -651,17 +687,17 @@ export class mUSDCTrade extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save mUSDCTrade entity without an ID");
+    assert(id !== null, "Cannot save mUSDCTransfer entity without an ID");
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save mUSDCTrade entity with non-string ID. " +
+      "Cannot save mUSDCTransfer entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("mUSDCTrade", id.toString(), this);
+    store.set("mUSDCTransfer", id.toString(), this);
   }
 
-  static load(id: string): mUSDCTrade | null {
-    return store.get("mUSDCTrade", id) as mUSDCTrade | null;
+  static load(id: string): mUSDCTransfer | null {
+    return store.get("mUSDCTransfer", id) as mUSDCTransfer | null;
   }
 
   get id(): string {
@@ -671,6 +707,306 @@ export class mUSDCTrade extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
+  }
+
+  get symbol(): string {
+    let value = this.get("symbol");
+    return value.toString();
+  }
+
+  set symbol(value: string) {
+    this.set("symbol", Value.fromString(value));
+  }
+
+  get transferedFrom(): Bytes {
+    let value = this.get("transferedFrom");
+    return value.toBytes();
+  }
+
+  set transferedFrom(value: Bytes) {
+    this.set("transferedFrom", Value.fromBytes(value));
+  }
+
+  get transferedTo(): Bytes {
+    let value = this.get("transferedTo");
+    return value.toBytes();
+  }
+
+  set transferedTo(value: Bytes) {
+    this.set("transferedTo", Value.fromBytes(value));
+  }
+
+  get amountTransfered(): BigInt {
+    let value = this.get("amountTransfered");
+    return value.toBigInt();
+  }
+
+  set amountTransfered(value: BigInt) {
+    this.set("amountTransfered", Value.fromBigInt(value));
+  }
+
+  get transactionDate(): BigInt {
+    let value = this.get("transactionDate");
+    return value.toBigInt();
+  }
+
+  set transactionDate(value: BigInt) {
+    this.set("transactionDate", Value.fromBigInt(value));
+  }
+
+  get transactionBlock(): BigInt {
+    let value = this.get("transactionBlock");
+    return value.toBigInt();
+  }
+
+  set transactionBlock(value: BigInt) {
+    this.set("transactionBlock", Value.fromBigInt(value));
+  }
+}
+
+export class mETHMint extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save mETHMint entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save mETHMint entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("mETHMint", id.toString(), this);
+  }
+
+  static load(id: string): mETHMint | null {
+    return store.get("mETHMint", id) as mETHMint | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get symbol(): string {
+    let value = this.get("symbol");
+    return value.toString();
+  }
+
+  set symbol(value: string) {
+    this.set("symbol", Value.fromString(value));
+  }
+
+  get tokenAddress(): Bytes {
+    let value = this.get("tokenAddress");
+    return value.toBytes();
+  }
+
+  set tokenAddress(value: Bytes) {
+    this.set("tokenAddress", Value.fromBytes(value));
+  }
+
+  get minterAddress(): Bytes {
+    let value = this.get("minterAddress");
+    return value.toBytes();
+  }
+
+  set minterAddress(value: Bytes) {
+    this.set("minterAddress", Value.fromBytes(value));
+  }
+
+  get recipientAddress(): Bytes {
+    let value = this.get("recipientAddress");
+    return value.toBytes();
+  }
+
+  set recipientAddress(value: Bytes) {
+    this.set("recipientAddress", Value.fromBytes(value));
+  }
+
+  get amountMinted(): BigInt {
+    let value = this.get("amountMinted");
+    return value.toBigInt();
+  }
+
+  set amountMinted(value: BigInt) {
+    this.set("amountMinted", Value.fromBigInt(value));
+  }
+
+  get totalSupply(): BigInt {
+    let value = this.get("totalSupply");
+    return value.toBigInt();
+  }
+
+  set totalSupply(value: BigInt) {
+    this.set("totalSupply", Value.fromBigInt(value));
+  }
+
+  get transactionDate(): BigInt {
+    let value = this.get("transactionDate");
+    return value.toBigInt();
+  }
+
+  set transactionDate(value: BigInt) {
+    this.set("transactionDate", Value.fromBigInt(value));
+  }
+
+  get transactionBlock(): BigInt {
+    let value = this.get("transactionBlock");
+    return value.toBigInt();
+  }
+
+  set transactionBlock(value: BigInt) {
+    this.set("transactionBlock", Value.fromBigInt(value));
+  }
+}
+
+export class mETHRedeem extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save mETHRedeem entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save mETHRedeem entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("mETHRedeem", id.toString(), this);
+  }
+
+  static load(id: string): mETHRedeem | null {
+    return store.get("mETHRedeem", id) as mETHRedeem | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get symbol(): string {
+    let value = this.get("symbol");
+    return value.toString();
+  }
+
+  set symbol(value: string) {
+    this.set("symbol", Value.fromString(value));
+  }
+
+  get tokenAddress(): Bytes {
+    let value = this.get("tokenAddress");
+    return value.toBytes();
+  }
+
+  set tokenAddress(value: Bytes) {
+    this.set("tokenAddress", Value.fromBytes(value));
+  }
+
+  get redeemerAddress(): Bytes {
+    let value = this.get("redeemerAddress");
+    return value.toBytes();
+  }
+
+  set redeemerAddress(value: Bytes) {
+    this.set("redeemerAddress", Value.fromBytes(value));
+  }
+
+  get recipientAddress(): Bytes {
+    let value = this.get("recipientAddress");
+    return value.toBytes();
+  }
+
+  set recipientAddress(value: Bytes) {
+    this.set("recipientAddress", Value.fromBytes(value));
+  }
+
+  get amountRedeemed(): BigInt {
+    let value = this.get("amountRedeemed");
+    return value.toBigInt();
+  }
+
+  set amountRedeemed(value: BigInt) {
+    this.set("amountRedeemed", Value.fromBigInt(value));
+  }
+
+  get totalSupply(): BigInt {
+    let value = this.get("totalSupply");
+    return value.toBigInt();
+  }
+
+  set totalSupply(value: BigInt) {
+    this.set("totalSupply", Value.fromBigInt(value));
+  }
+
+  get transactionDate(): BigInt {
+    let value = this.get("transactionDate");
+    return value.toBigInt();
+  }
+
+  set transactionDate(value: BigInt) {
+    this.set("transactionDate", Value.fromBigInt(value));
+  }
+
+  get transactionBlock(): BigInt {
+    let value = this.get("transactionBlock");
+    return value.toBigInt();
+  }
+
+  set transactionBlock(value: BigInt) {
+    this.set("transactionBlock", Value.fromBigInt(value));
+  }
+}
+
+export class mETHTransfer extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save mETHTransfer entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save mETHTransfer entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("mETHTransfer", id.toString(), this);
+  }
+
+  static load(id: string): mETHTransfer | null {
+    return store.get("mETHTransfer", id) as mETHTransfer | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get symbol(): string {
+    let value = this.get("symbol");
+    return value.toString();
+  }
+
+  set symbol(value: string) {
+    this.set("symbol", Value.fromString(value));
   }
 
   get transferedFrom(): Bytes {
