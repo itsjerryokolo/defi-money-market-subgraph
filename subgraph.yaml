@@ -14,7 +14,6 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - dmgApproval
         - dmgTransfer
       abis:
         - name: DMMToken
@@ -67,8 +66,8 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - mUSDCMinted
-        - mUSDCRedeemed
+        - mUSDCMint
+        - mUSDCRedeem
         - mUSDCTransfer
       abis:
         - name: mUSDC
@@ -93,8 +92,8 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - mETHMinted
-        - mETHRedeemed
+        - mETHMint
+        - mETHRedeem
         - mETHTransfer
       abis:
         - name: mETH
@@ -106,4 +105,27 @@ dataSources:
           handler: handleMETHRedeem 
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleMETHTransfer 
-      file: ./src/mapping.ts   
+      file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: dmgGovernance
+    network: mainnet
+    source:
+      address: "0x67Cb2868Ebf965b66d3dC81D0aDd6fd849BCF6D5"
+      abi: dmgGovernance
+      startBlock: 10596003 
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - governanceProposal
+        - Vote
+      abis:
+        - name: dmgGovernance
+          file: ./abis/dmgGovernance.json
+      eventHandlers:
+        - event: ProposalCreated(uint256,address,address[],uint256[],string[],bytes[],uint256,uint256,string,string)
+          handler: handleProposalCreated
+        - event: VoteCast(address,uint256,bool,uint256)
+          handler: handleVoteCast  
+      file: ./src/mapping.ts      
