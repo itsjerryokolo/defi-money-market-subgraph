@@ -12,82 +12,6 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class dmgApproval extends Entity {
-  constructor(id: string) {
-    super();
-    this.set("id", Value.fromString(id));
-  }
-
-  save(): void {
-    let id = this.get("id");
-    assert(id !== null, "Cannot save dmgApproval entity without an ID");
-    assert(
-      id.kind == ValueKind.STRING,
-      "Cannot save dmgApproval entity with non-string ID. " +
-        'Considering using .toHex() to convert the "id" to a string.'
-    );
-    store.set("dmgApproval", id.toString(), this);
-  }
-
-  static load(id: string): dmgApproval | null {
-    return store.get("dmgApproval", id) as dmgApproval | null;
-  }
-
-  get id(): string {
-    let value = this.get("id");
-    return value.toString();
-  }
-
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
-  }
-
-  get amountApproved(): BigInt {
-    let value = this.get("amountApproved");
-    return value.toBigInt();
-  }
-
-  set amountApproved(value: BigInt) {
-    this.set("amountApproved", Value.fromBigInt(value));
-  }
-
-  get ownerAddress(): Bytes {
-    let value = this.get("ownerAddress");
-    return value.toBytes();
-  }
-
-  set ownerAddress(value: Bytes) {
-    this.set("ownerAddress", Value.fromBytes(value));
-  }
-
-  get spenderAddress(): Bytes {
-    let value = this.get("spenderAddress");
-    return value.toBytes();
-  }
-
-  set spenderAddress(value: Bytes) {
-    this.set("spenderAddress", Value.fromBytes(value));
-  }
-
-  get transactionDate(): BigInt {
-    let value = this.get("transactionDate");
-    return value.toBigInt();
-  }
-
-  set transactionDate(value: BigInt) {
-    this.set("transactionDate", Value.fromBigInt(value));
-  }
-
-  get transactionBlock(): BigInt {
-    let value = this.get("transactionBlock");
-    return value.toBigInt();
-  }
-
-  set transactionBlock(value: BigInt) {
-    this.set("transactionBlock", Value.fromBigInt(value));
-  }
-}
-
 export class dmgTransfer extends Entity {
   constructor(id: string) {
     super();
@@ -1052,5 +976,166 @@ export class mETHTransfer extends Entity {
 
   set transactionBlock(value: BigInt) {
     this.set("transactionBlock", Value.fromBigInt(value));
+  }
+}
+
+export class governanceProposal extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save governanceProposal entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save governanceProposal entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("governanceProposal", id.toString(), this);
+  }
+
+  static load(id: string): governanceProposal | null {
+    return store.get("governanceProposal", id) as governanceProposal | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get title(): string {
+    let value = this.get("title");
+    return value.toString();
+  }
+
+  set title(value: string) {
+    this.set("title", Value.fromString(value));
+  }
+
+  get description(): string {
+    let value = this.get("description");
+    return value.toString();
+  }
+
+  set description(value: string) {
+    this.set("description", Value.fromString(value));
+  }
+
+  get proposerAddress(): Bytes {
+    let value = this.get("proposerAddress");
+    return value.toBytes();
+  }
+
+  set proposerAddress(value: Bytes) {
+    this.set("proposerAddress", Value.fromBytes(value));
+  }
+
+  get proposalDate(): BigInt {
+    let value = this.get("proposalDate");
+    return value.toBigInt();
+  }
+
+  set proposalDate(value: BigInt) {
+    this.set("proposalDate", Value.fromBigInt(value));
+  }
+
+  get startBlock(): BigInt {
+    let value = this.get("startBlock");
+    return value.toBigInt();
+  }
+
+  set startBlock(value: BigInt) {
+    this.set("startBlock", Value.fromBigInt(value));
+  }
+
+  get endBlock(): BigInt {
+    let value = this.get("endBlock");
+    return value.toBigInt();
+  }
+
+  set endBlock(value: BigInt) {
+    this.set("endBlock", Value.fromBigInt(value));
+  }
+}
+
+export class Vote extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Vote entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Vote entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Vote", id.toString(), this);
+  }
+
+  static load(id: string): Vote | null {
+    return store.get("Vote", id) as Vote | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get governanceProposalID(): BigInt {
+    let value = this.get("governanceProposalID");
+    return value.toBigInt();
+  }
+
+  set governanceProposalID(value: BigInt) {
+    this.set("governanceProposalID", Value.fromBigInt(value));
+  }
+
+  get voterAddress(): Bytes {
+    let value = this.get("voterAddress");
+    return value.toBytes();
+  }
+
+  set voterAddress(value: Bytes) {
+    this.set("voterAddress", Value.fromBytes(value));
+  }
+
+  get support(): boolean {
+    let value = this.get("support");
+    return value.toBoolean();
+  }
+
+  set support(value: boolean) {
+    this.set("support", Value.fromBoolean(value));
+  }
+
+  get voteAmount(): BigInt {
+    let value = this.get("voteAmount");
+    return value.toBigInt();
+  }
+
+  set voteAmount(value: BigInt) {
+    this.set("voteAmount", Value.fromBigInt(value));
+  }
+
+  get transactionDate(): BigInt {
+    let value = this.get("transactionDate");
+    return value.toBigInt();
+  }
+
+  set transactionDate(value: BigInt) {
+    this.set("transactionDate", Value.fromBigInt(value));
   }
 }
