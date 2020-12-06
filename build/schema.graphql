@@ -1,35 +1,20 @@
-type dmgApproval @entity {
-  "Transaction ID"
-  id: ID!
-  "Amount approved for transaction"
-  amountApproved: BigInt!
-  "Address of the owner"
-  ownerAddress: Bytes!
-  "Spender is the Contract Address being approved to spend"
-  spenderAddress: Bytes!
-  "Transaction date"
-  transactionDate: BigInt!
-  "Block Number"
-  transactionBlock: BigInt!
-}
-
 type dmgTransfer @entity {
   "Transaction ID"
     id: ID!
-    "Token Symbol"
+    "Token symbol"
     symbol: String!
-    "Contract Address transfering DMG"
+    "Address transfering DMG"
     transferedFrom: Bytes!
-    "Adress trading DMG"
+    "Adress receiving DMG"
     transferedTo: Bytes!
-    """Transfered value in ETH
-    Hint: Transfers not in ETH will return 0"""
+    """Transfered value in ETH.
+    Transfers not in ETH will return 0"""
     amountTransfered: BigInt!
-    "Total Supply of token at Transaction Date"
+    "Total supply of DMG at transaction date"
     totalSupply: BigInt!
     "Transaction date"
     transactionDate: BigInt!
-    "Block Number"
+    "Block number"
     transactionBlock: BigInt!
 
 }
@@ -37,60 +22,60 @@ type dmgTransfer @entity {
 type mDaiMint @entity{
   "Transaction ID"
     id: ID!
-    "Token Symbol"
+    "Token symbol"
     symbol: String!
-    "Contract Address of the Token"
+    "Contract address of mDai"
     tokenAddress: Bytes!
     "Address of the Minter"
     minterAddress: Bytes!
-    "Address of the Recipient"
+    "Recipient address of mDai being minted"
     recipientAddress: Bytes!
     "Amount minted by Minter"
     amountMinted: BigInt!
-    "Total Supply of token at Transaction Date"
+    "Total supply of mDai at transaction date"
     totalSupply: BigInt!
-    "Transaction Date"
+    "Transaction date"
     transactionDate: BigInt!
-    "Block Number"
+    "Block number"
     transactionBlock: BigInt!  
 }
 
 type mDaiRedeem @entity{
   "Transaction ID"
     id: ID!
-    "Token Symbol"
+    "Token symbol"
     symbol: String!
-    "Contract Address of the Token"
+    "Contract address of mDai"
     tokenAddress: Bytes!
     "Address of the Redeemer"
     redeemerAddress: Bytes!
-    "Address of the Recipient"
+    "Recipient address of mDai being redeemed"
     recipientAddress: Bytes!
-    "Amount minted by Redeemer"
+    "Amount redeemed by Redeemer"
     amountRedeemed: BigInt!
-    "Total Supply of token at Transaction Date"
+    "Total supply of mDai at transaction date"
     totalSupply:  BigInt!
-    "Transaction Date"
+    "Transaction date"
     transactionDate: BigInt!
-    "Block Number"
+    "Block number"
     transactionBlock: BigInt!
 }
 
 type mDaiTransfer @entity {
   "Transaction ID"
     id: ID!
-    "Token Symbol"
+    "Token symbol"
     symbol: String!
-    "Contract Address selling mDai"
+    "Address transfering mDai"
     transferedFrom: Bytes!
-    "Adress trading mDai"
+    "Address receiving mDai"
     transferedTo: Bytes!
-    """Transfered value in ETH
-    Hint: Transfers not in ETH will return 0"""
+    """Transfered value in ETH.
+    Transfers not in ETH will return 0"""
     amountTransfered: BigInt!
     "Transaction date"
     transactionDate: BigInt!
-    "Block Number"
+    "Block number"
     transactionBlock: BigInt!
 }
 
@@ -99,19 +84,19 @@ type mUSDCMint @entity{
     id: ID!
     "Token Symbol"
     symbol: String!
-    "Contract Address of the Token"
+    "Contract address of mUSDC"
     tokenAddress: Bytes!
     "Address of the Minter"
     minterAddress: Bytes!
-    "Address of the Recipient"
+    "Recipient address of mUSDC being minted"
     recipientAddress: Bytes!
     "Amount minted by Minter"
     amountMinted: BigInt!
-    "Total Supply of token at Transaction Date"
+    "Total supply of mUSDC at transaction date"
     totalSupply: BigInt!
-    "Transaction Date"
+    "Transaction date"
     transactionDate: BigInt!
-    "Block Number"
+    "Block number"
     transactionBlock: BigInt!
 }
 
@@ -120,19 +105,19 @@ type mUSDCRedeem @entity{
     id: ID!
     "Token Symbol"
     symbol: String!
-    "Contract Address of the Token"
+    "Contract address of the token"
     tokenAddress: Bytes!
     "Address of the Redeemer"
     redeemerAddress: Bytes!
-    "Address of the Recipient"
+    "Recipient address of mUSDC being redeemed"
     recipientAddress: Bytes!
-    "Amount minted by Redeemer"
+    "Amount redeemed by Redeemer"
     amountRedeemed: BigInt!
-    "Total Supply of token at Transaction Date"
+    "Total supply of mUSDC at transaction date"
     totalSupply: BigInt!
-    "Transaction Date"
+    "Transaction date"
     transactionDate: BigInt!
-    "Block Number"
+    "Block number"
     transactionBlock: BigInt!
 }
 type mUSDCTransfer @entity {
@@ -140,74 +125,106 @@ type mUSDCTransfer @entity {
     id: ID!
     "Token Symbol"
     symbol: String!
-    "Contract Address selling mUSDC"
+    "Address transfering mUSDC"
     transferedFrom: Bytes!
-    "Adress trading mUSDC"
+    "Address receiving mUSDC"
     transferedTo: Bytes!
-    """Transfered value in ETH
-    Hint: Transfers not in ETH will return 0"""
+    """Transfered value in ETH.
+    Transfers not in ETH will return 0"""
     amountTransfered: BigInt!
     "Transaction date"
     transactionDate: BigInt!
-    "Block Number"
+    "Block number"
     transactionBlock: BigInt!
 }
 
 type mETHMint @entity{
   "Transaction ID"
     id: ID!
-    "Token Symbol"
+    "Token symbol"
     symbol: String!
-    "Contract Address of the Token"
+    "Contract address of mETH"
     tokenAddress: Bytes!
     "Address of the Minter"
     minterAddress: Bytes!
-    "Address of the Recipient"
+    "Recipient address of mETH being minted"
     recipientAddress: Bytes!
     "Amount minted by Minter"
     amountMinted: BigInt!
-    "Total Supply of token at Transaction Date"
+    "Total supply of mETH at transaction date"
     totalSupply: BigInt!
-    "Transaction Date"
+    "Transaction date"
     transactionDate: BigInt!
-    "Block Number"
+    "Block number"
     transactionBlock: BigInt!
 }
 
 type mETHRedeem @entity{
   "Transaction ID"
     id: ID!
-    "Token Symbol"
+    "Token symbol"
     symbol: String!
-    "Contract Address of the Token"
+    "Contract address of mETH"
     tokenAddress: Bytes!
     "Address of the Redeemer"
     redeemerAddress: Bytes!
-    "Address of the Recipient"
+    "Recipient address of mETH being redeemed"
     recipientAddress: Bytes!
-    "Amount minted by Redeemer"
+    "Amount redeemed by Redeemer"
     amountRedeemed: BigInt!
-    "Total Supply of token at Transaction Date"
+    "Total supply of mETH at transaction date"
     totalSupply: BigInt!
-    "Transaction Date"
+    "Transaction date"
     transactionDate: BigInt!
-    "Block Number"
+    "Block number"
     transactionBlock: BigInt!
 }
 type mETHTransfer @entity {
   "Transaction ID"
     id: ID!
-    "Token Symbol"
+    "Token symbol"
     symbol: String!
-    "Contract Address selling mETH"
+    "Address transfering mETH"
     transferedFrom: Bytes!
-    "Adress trading mETH"
+    "Address receiving mETH"
     transferedTo: Bytes!
-    """Transfered value in ETH
-    Hint: Transfers not in ETH will return 0"""
+    """Transfered value in ETH.
+    Transfers not in ETH will return 0"""
     amountTransfered: BigInt!
     "Transaction date"
     transactionDate: BigInt!
-    "Block Number"
+    "Block number"
     transactionBlock: BigInt!
+}
+type governanceProposal @entity{
+    "Governance Proposal ID"
+    id: ID!
+    "Title of the proposal"
+    title: String!
+    "Description of the proposal"
+    description: String!
+    "Address of proposer"
+    proposerAddress: Bytes!
+    "Date proposed"
+    proposalDate:BigInt!
+    "Block at which voting begins"
+    startBlock: BigInt!
+    "Block at which vote ends"
+    endBlock: BigInt!
+
+}
+type Vote @entity{
+    "Transaction ID"
+    id: ID!
+    "Governance Proposal ID"
+    governanceProposalID:BigInt!
+    "Address of Voter"
+    voterAddress: Bytes!
+    "For is true, Against is false"
+    support: Boolean!
+    "DMG used for voting"
+    voteAmount: BigInt!
+    "Vote date"
+    transactionDate:BigInt!
+
 }
