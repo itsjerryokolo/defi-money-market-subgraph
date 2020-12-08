@@ -216,7 +216,7 @@ type governanceProposal @entity{
 type Vote @entity{
     "Transaction ID"
     id: ID!
-    "Governance Proposal ID"
+    "Governance proposal number"
     governanceProposalID:BigInt!
     "Address of Voter"
     voterAddress: Bytes!
