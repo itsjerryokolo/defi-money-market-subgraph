@@ -22,6 +22,12 @@ import {
   Redeem
 } from "../generated/mETH/mETH"
 
+// import {
+//   mUSDK,
+//   Mint,
+//   Redeem
+// } from "../generated/mUSDK/mUSDK"
+
 import {
   dmgGovernance,
   ProposalCreated,
@@ -33,6 +39,7 @@ import { dmgTransfer  } from "../generated/schema"
 import {mDaiMint, mDaiRedeem, mDaiTransfer } from "../generated/schema"
 import {mUSDCMint, mUSDCRedeem, mUSDCTransfer} from "../generated/schema"
 import {mETHMint, mETHRedeem, mETHTransfer} from "../generated/schema"
+//import {mUSDKMint, mUSDKRedeem, mUSDKTransfer} from "../generated/schema"
 import {governanceProposal, Vote} from "../generated/schema"
 
   //  Entities can be loaded from the store using a string ID; this ID
@@ -246,6 +253,49 @@ export function handleMUSDCMint (event: Mint): void{
       methTrade.save()
   }
 //-----------------------------mETH end
+
+//-----------------------------mUSDK start
+// export function handleUSDKMint (event: Mint): void{
+//   let musdkMint = new mUSDKMint(event.transaction.hash.toHex())
+//   let contract = mUSDK.bind(event.address)
+//   musdkMint.minterAddress = event.params.minter
+//   musdkMint.recipientAddress = event.params.recipient
+//   musdkMint.amountMinted = event.params.amount
+//   musdkMint.tokenAddress = contract._address
+//   musdkMint.symbol =  contract.symbol()
+//   musdkMint.totalSupply = contract.totalSupply()
+//   musdkMint.transactionDate = event.block.timestamp
+//   musdkMint.transactionBlock = event.block.number
+//   musdkMint.save()
+// }
+
+
+// export function handleMUSDKRedeem (event: Redeem): void{
+//     let musdkRedeem = new mUSDKRedeem(event.transaction.hash.toHex())
+//     let contract = mUSDK.bind(event.address)
+//     musdkRedeem.redeemerAddress = event.params.redeemer
+//     musdkRedeem.recipientAddress = event.params.recipient
+//     musdkRedeem.amountRedeemed = event.params.amount
+//     musdkRedeem.tokenAddress = contract._address
+//     musdkRedeem.symbol =  contract.symbol()
+//     musdkRedeem.totalSupply = contract.totalSupply()
+//     musdkRedeem.transactionDate = event.block.timestamp
+//     musdkRedeem.transactionBlock = event.block.number
+//     musdkRedeem.save() 
+// }
+// export function handleUSDKTransfer (event: Transfer): void{
+//     let musdkTrade = new mUSDKTransfer(event.transaction.hash.toHex())
+//     let contract = mUSDK.bind(event.address)
+//     musdkTrade.symbol =  contract.symbol()
+//     musdkTrade.transferedFrom= event.params.from
+//     musdkTrade.transferedTo = event.params.to
+//     musdkTrade.amountTransfered = event.transaction.value
+//     musdkTrade.transactionDate = event.block.timestamp
+//     musdkTrade.transactionBlock = event.block.number
+//     musdkTrade.save()
+// }
+//-----------------------------mUSDK end
+
 
 //-----------------------------dmgGovernance
 export function handleProposalCreated (event: ProposalCreated): void{

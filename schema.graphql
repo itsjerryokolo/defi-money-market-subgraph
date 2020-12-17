@@ -196,6 +196,65 @@ type mETHTransfer @entity {
     "Block number"
     transactionBlock: BigInt!
 }
+
+# type mUSDKMint @entity{
+#   "Transaction ID"
+#     id: ID!
+#     "Token symbol"
+#     symbol: String!
+#     "Contract address of USDK"
+#     tokenAddress: Bytes!
+#     "Address of the Minter"
+#     minterAddress: Bytes!
+#     "Recipient address of USDK being minted"
+#     recipientAddress: Bytes!
+#     "Amount minted by Minter"
+#     amountMinted: BigInt!
+#     "Total supply of USDK at transaction date"
+#     totalSupply: BigInt!
+#     "Transaction date"
+#     transactionDate: BigInt!
+#     "Block number"
+#     transactionBlock: BigInt!
+# }
+
+# type mUSDKRedeem @entity{
+#   "Transaction ID"
+#     id: ID!
+#     "Token symbol"
+#     symbol: String!
+#     "Contract address of mUSDK"
+#     tokenAddress: Bytes!
+#     "Address of the Redeemer"
+#     redeemerAddress: Bytes!
+#     "Recipient address of mUSDK being redeemed"
+#     recipientAddress: Bytes!
+#     "Amount redeemed by Redeemer"
+#     amountRedeemed: BigInt!
+#     "Total supply of USDK at transaction date"
+#     totalSupply: BigInt!
+#     "Transaction date"
+#     transactionDate: BigInt!
+#     "Block number"
+#     transactionBlock: BigInt!
+# }
+# type mUSDKTransfer @entity {
+#   "Transaction ID"
+#     id: ID!
+#     "Token symbol"
+#     symbol: String!
+#     "Address transfering USDK"
+#     transferedFrom: Bytes!
+#     "Address receiving USDK"
+#     transferedTo: Bytes!
+#     """Transfered value in ETH.
+#     Transfers not in ETH will return 0"""
+#     amountTransfered: BigInt!
+#     "Transaction date"
+#     transactionDate: BigInt!
+#     "Block number"
+#     transactionBlock: BigInt!
+# }
 type governanceProposal @entity{
     "Governance Proposal ID"
     id: ID!
