@@ -4,11 +4,20 @@ Defi Money Market is an open source protocol that allows users earn a stable 6.2
 ## Example Query
 ```graphql
 {
-  mDaiMints(first: 5) {
+  votes(where:{governanceProposalID:"10"}){
+  	id
+  	governanceProposalID
+    voteAmount
+    voterAddress
+    support
+    transactionDate
+  }
+  governanceProposals(first:5){
     id
-    symbol
-    tokenAddress
-    minterAddress
+    description
+    proposalDate
+    startBlock
+    endBlock
   }
 }
 ```
