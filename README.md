@@ -5,8 +5,8 @@ Defi Money Market is an open source protocol that allows users earn a stable 6.2
 ```graphql
 {
   votes(where:{governanceProposalID:"10"}){
-  	id
-  	governanceProposalID
+    id
+    governanceProposalID
     voteAmount
     voterAddress
     support
