@@ -106,6 +106,33 @@ dataSources:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleMETHTransfer 
       file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: mUSDT
+    network: mainnet
+    source:
+      address: "0x84d4AfE150dA7Ea1165B9e45Ff8Ee4798d7C38DA"
+      abi: mUSDT
+      startBlock: 10738734 
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - mUSDTMint
+        - mUSDTRedeem
+        - mUSDTTransfer
+      abis:
+        - name: mUSDT
+          file: ./abis/mUSDT.json
+      eventHandlers:
+        - event: Mint(indexed address,indexed address,uint256)
+          handler: handleMUSDTMint
+        - event: Redeem(indexed address,indexed address,uint256)
+          handler: handleMUSDTRedeem 
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleMUSDTTransfer 
+      file: ./src/mapping.ts
   - kind: ethereum/contract
     name: dmgGovernance
     network: mainnet

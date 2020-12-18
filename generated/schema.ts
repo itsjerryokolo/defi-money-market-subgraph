@@ -979,6 +979,297 @@ export class mETHTransfer extends Entity {
   }
 }
 
+export class mUSDTMint extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save mUSDTMint entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save mUSDTMint entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("mUSDTMint", id.toString(), this);
+  }
+
+  static load(id: string): mUSDTMint | null {
+    return store.get("mUSDTMint", id) as mUSDTMint | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get symbol(): string {
+    let value = this.get("symbol");
+    return value.toString();
+  }
+
+  set symbol(value: string) {
+    this.set("symbol", Value.fromString(value));
+  }
+
+  get tokenAddress(): Bytes {
+    let value = this.get("tokenAddress");
+    return value.toBytes();
+  }
+
+  set tokenAddress(value: Bytes) {
+    this.set("tokenAddress", Value.fromBytes(value));
+  }
+
+  get minterAddress(): Bytes {
+    let value = this.get("minterAddress");
+    return value.toBytes();
+  }
+
+  set minterAddress(value: Bytes) {
+    this.set("minterAddress", Value.fromBytes(value));
+  }
+
+  get recipientAddress(): Bytes {
+    let value = this.get("recipientAddress");
+    return value.toBytes();
+  }
+
+  set recipientAddress(value: Bytes) {
+    this.set("recipientAddress", Value.fromBytes(value));
+  }
+
+  get amountMinted(): BigInt {
+    let value = this.get("amountMinted");
+    return value.toBigInt();
+  }
+
+  set amountMinted(value: BigInt) {
+    this.set("amountMinted", Value.fromBigInt(value));
+  }
+
+  get totalSupply(): BigInt {
+    let value = this.get("totalSupply");
+    return value.toBigInt();
+  }
+
+  set totalSupply(value: BigInt) {
+    this.set("totalSupply", Value.fromBigInt(value));
+  }
+
+  get transactionDate(): BigInt {
+    let value = this.get("transactionDate");
+    return value.toBigInt();
+  }
+
+  set transactionDate(value: BigInt) {
+    this.set("transactionDate", Value.fromBigInt(value));
+  }
+
+  get transactionBlock(): BigInt {
+    let value = this.get("transactionBlock");
+    return value.toBigInt();
+  }
+
+  set transactionBlock(value: BigInt) {
+    this.set("transactionBlock", Value.fromBigInt(value));
+  }
+}
+
+export class mUSDTRedeem extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save mUSDTRedeem entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save mUSDTRedeem entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("mUSDTRedeem", id.toString(), this);
+  }
+
+  static load(id: string): mUSDTRedeem | null {
+    return store.get("mUSDTRedeem", id) as mUSDTRedeem | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get symbol(): string {
+    let value = this.get("symbol");
+    return value.toString();
+  }
+
+  set symbol(value: string) {
+    this.set("symbol", Value.fromString(value));
+  }
+
+  get tokenAddress(): Bytes {
+    let value = this.get("tokenAddress");
+    return value.toBytes();
+  }
+
+  set tokenAddress(value: Bytes) {
+    this.set("tokenAddress", Value.fromBytes(value));
+  }
+
+  get redeemerAddress(): Bytes {
+    let value = this.get("redeemerAddress");
+    return value.toBytes();
+  }
+
+  set redeemerAddress(value: Bytes) {
+    this.set("redeemerAddress", Value.fromBytes(value));
+  }
+
+  get recipientAddress(): Bytes {
+    let value = this.get("recipientAddress");
+    return value.toBytes();
+  }
+
+  set recipientAddress(value: Bytes) {
+    this.set("recipientAddress", Value.fromBytes(value));
+  }
+
+  get amountRedeemed(): BigInt {
+    let value = this.get("amountRedeemed");
+    return value.toBigInt();
+  }
+
+  set amountRedeemed(value: BigInt) {
+    this.set("amountRedeemed", Value.fromBigInt(value));
+  }
+
+  get totalSupply(): BigInt {
+    let value = this.get("totalSupply");
+    return value.toBigInt();
+  }
+
+  set totalSupply(value: BigInt) {
+    this.set("totalSupply", Value.fromBigInt(value));
+  }
+
+  get transactionDate(): BigInt {
+    let value = this.get("transactionDate");
+    return value.toBigInt();
+  }
+
+  set transactionDate(value: BigInt) {
+    this.set("transactionDate", Value.fromBigInt(value));
+  }
+
+  get transactionBlock(): BigInt {
+    let value = this.get("transactionBlock");
+    return value.toBigInt();
+  }
+
+  set transactionBlock(value: BigInt) {
+    this.set("transactionBlock", Value.fromBigInt(value));
+  }
+}
+
+export class mUSDTTransfer extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save mUSDTTransfer entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save mUSDTTransfer entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("mUSDTTransfer", id.toString(), this);
+  }
+
+  static load(id: string): mUSDTTransfer | null {
+    return store.get("mUSDTTransfer", id) as mUSDTTransfer | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get symbol(): string {
+    let value = this.get("symbol");
+    return value.toString();
+  }
+
+  set symbol(value: string) {
+    this.set("symbol", Value.fromString(value));
+  }
+
+  get transferedFrom(): Bytes {
+    let value = this.get("transferedFrom");
+    return value.toBytes();
+  }
+
+  set transferedFrom(value: Bytes) {
+    this.set("transferedFrom", Value.fromBytes(value));
+  }
+
+  get transferedTo(): Bytes {
+    let value = this.get("transferedTo");
+    return value.toBytes();
+  }
+
+  set transferedTo(value: Bytes) {
+    this.set("transferedTo", Value.fromBytes(value));
+  }
+
+  get amountTransfered(): BigInt {
+    let value = this.get("amountTransfered");
+    return value.toBigInt();
+  }
+
+  set amountTransfered(value: BigInt) {
+    this.set("amountTransfered", Value.fromBigInt(value));
+  }
+
+  get transactionDate(): BigInt {
+    let value = this.get("transactionDate");
+    return value.toBigInt();
+  }
+
+  set transactionDate(value: BigInt) {
+    this.set("transactionDate", Value.fromBigInt(value));
+  }
+
+  get transactionBlock(): BigInt {
+    let value = this.get("transactionBlock");
+    return value.toBigInt();
+  }
+
+  set transactionBlock(value: BigInt) {
+    this.set("transactionBlock", Value.fromBigInt(value));
+  }
+}
+
 export class governanceProposal extends Entity {
   constructor(id: string) {
     super();

@@ -18,7 +18,10 @@ type dmgTransfer @entity {
     transactionBlock: BigInt!
 
 }
+#-------------------------------------dmgTransfer end
 
+
+#-------------------------------------mDai start
 type mDaiMint @entity{
   "Transaction ID"
     id: ID!
@@ -78,7 +81,11 @@ type mDaiTransfer @entity {
     "Block number"
     transactionBlock: BigInt!
 }
+#-------------------------------------mDai end
 
+
+
+#-------------------------------------mUSDC start
 type mUSDCMint @entity{
   "Transaction ID"
     id: ID!
@@ -137,7 +144,11 @@ type mUSDCTransfer @entity {
     "Block number"
     transactionBlock: BigInt!
 }
+#-------------------------------------mUSDC end
 
+
+
+#-------------------------------------mETH start
 type mETHMint @entity{
   "Transaction ID"
     id: ID!
@@ -196,7 +207,9 @@ type mETHTransfer @entity {
     "Block number"
     transactionBlock: BigInt!
 }
+#-------------------------------------mETH end
 
+#-------------------------------------mUSDK start
 # type mUSDKMint @entity{
 #   "Transaction ID"
 #     id: ID!
@@ -255,6 +268,72 @@ type mETHTransfer @entity {
 #     "Block number"
 #     transactionBlock: BigInt!
 # }
+#-------------------------------------mUSDK end
+
+
+#-------------------------------------mUSDT start
+type mUSDTMint @entity{
+  "Transaction ID"
+    id: ID!
+    "Token symbol"
+    symbol: String!
+    "Contract address of mUSDT"
+    tokenAddress: Bytes!
+    "Address of the Minter"
+    minterAddress: Bytes!
+    "Recipient address of mUSDT being minted"
+    recipientAddress: Bytes!
+    "Amount minted by Minter"
+    amountMinted: BigInt!
+    "Total supply of mUSDT at transaction date"
+    totalSupply: BigInt!
+    "Transaction date"
+    transactionDate: BigInt!
+    "Block number"
+    transactionBlock: BigInt!
+}
+
+type mUSDTRedeem @entity{
+  "Transaction ID"
+    id: ID!
+    "Token symbol"
+    symbol: String!
+    "Contract address of mUSDK"
+    tokenAddress: Bytes!
+    "Address of the Redeemer"
+    redeemerAddress: Bytes!
+    "Recipient address of mUSDT being redeemed"
+    recipientAddress: Bytes!
+    "Amount redeemed by Redeemer"
+    amountRedeemed: BigInt!
+    "Total supply of mUSDT at transaction date"
+    totalSupply: BigInt!
+    "Transaction date"
+    transactionDate: BigInt!
+    "Block number"
+    transactionBlock: BigInt!
+}
+type mUSDTTransfer @entity {
+  "Transaction ID"
+    id: ID!
+    "Token symbol"
+    symbol: String!
+    "Address transfering mUSDT"
+    transferedFrom: Bytes!
+    "Address receiving mUSDT"
+    transferedTo: Bytes!
+    """Transfered value in ETH.
+    Transfers not in ETH will return 0"""
+    amountTransfered: BigInt!
+    "Transaction date"
+    transactionDate: BigInt!
+    "Block number"
+    transactionBlock: BigInt!
+}
+#-------------------------------------mUSDT end
+
+
+#-------------------------------------governance start
 type governanceProposal @entity{
     "Governance Proposal ID"
     id: ID!

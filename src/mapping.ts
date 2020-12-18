@@ -22,6 +22,12 @@ import {
   Redeem
 } from "../generated/mETH/mETH"
 
+import {
+  mUSDT,
+  Mint,
+  Redeem
+} from "../generated/mUSDT/mUSDT"
+
 // import {
 //   mUSDK,
 //   Mint,
@@ -39,74 +45,10 @@ import { dmgTransfer  } from "../generated/schema"
 import {mDaiMint, mDaiRedeem, mDaiTransfer } from "../generated/schema"
 import {mUSDCMint, mUSDCRedeem, mUSDCTransfer} from "../generated/schema"
 import {mETHMint, mETHRedeem, mETHTransfer} from "../generated/schema"
+import {mUSDTMint, mUSDTRedeem, mUSDTTransfer} from "../generated/schema"
 //import {mUSDKMint, mUSDKRedeem, mUSDKTransfer} from "../generated/schema"
 import {governanceProposal, Vote} from "../generated/schema"
 
-  //  Entities can be loaded from the store using a string ID; this ID
-  //  needs to be unique across all entities of the same type
-  // let entity = ExampleEntity.load(event.transaction.from.toHex())
-
-  //  Entities only exist after they have been saved to the store;
-  //  `null` checks allow to create entities on demand
-  // if (entity == null) {
-  //   entity = new ExampleEntity(event.transaction.from.toHex())
-
-  //    Entity fields can be set using simple assignments
-  //   entity.count = BigInt.fromI32(0)
-  // }
-
-
-
-  // BigInt and BigDecimal math are supported
-  // entity.count = entity.count + BigInt.fromI32(1)
-
-  // // Entity fields can be set based on event parameters
-  // entity.owner = event.params.owner
-  // entity.spender = event.params.spender
-
-  // // Entities can be written to the store with `.save()`
-  // entity.save()
-
-  // Note: If a handler doesn't require existing field values, it is faster
-  // _not_ to load the entity from the store. Instead, create it fresh with
-  // `new Entity(...)`, set the fields that should be updated and save the
-  // entity back to the store. Fields that were not set or unset remain
-  // unchanged, allowing for partial updates to be applied.
-
-  // It is also possible to access smart contracts from mappings. For
-  // example, the contract that has emitted the event can be connected to
-  // with:
-  //
-  // let contract = Contract.bind(event.address)
-  //
-  // The following functions can then be called on this contract to access
-  // state variables and other data:
-  //
-  // - contract.APPROVE_TYPE_HASH(...)
-  // - contract.DELEGATION_TYPE_HASH(...)
-  // - contract.DOMAIN_TYPE_HASH(...)
-  // - contract.TRANSFER_TYPE_HASH(...)
-  // - contract.allowance(...)
-  // - contract.approve(...)
-  // - contract.balanceOf(...)
-  // - contract.burn(...)
-  // - contract.checkpoints(...)
-  // - contract.decimals(...)
-  // - contract.delegates(...)
-  // - contract.domainSeparator(...)
-  // - contract.getCurrentVotes(...)
-  // - contract.getPriorVotes(...)
-  // - contract.name(...)
-  // - contract.nonceOf(...)
-  // - contract.nonces(...)
-  // - contract.numCheckpoints(...)
-  // - contract.symbol(...)
-  // - contract.totalSupply(...)
-  // - contract.transfer(...)
-  // - contract.transferFrom(...)
-
-    //    Entity fields can be set using simple assignments
-    //   entity.count = BigInt.fromI32(0)
 
 
 export function handleDelegateChanged(event: DelegateChanged): void {}
@@ -253,6 +195,51 @@ export function handleMUSDCMint (event: Mint): void{
       methTrade.save()
   }
 //-----------------------------mETH end
+
+
+// //-----------------------------mUSDT start
+export function handleMUSDTMint (event: Mint): void{
+  let musdtMint = new mUSDTMint(event.transaction.hash.toHex())
+  let contract = mUSDT.bind(event.address)
+  musdtMint.minterAddress = event.params.minter
+  musdtMint.recipientAddress = event.params.recipient
+  musdtMint.amountMinted = event.params.amount
+  musdtMint.tokenAddress = contract._address
+  musdtMint.symbol =  contract.symbol()
+  musdtMint.totalSupply = contract.totalSupply()
+  musdtMint.transactionDate = event.block.timestamp
+  musdtMint.transactionBlock = event.block.number
+  musdtMint.save()
+}
+
+
+export function handleMUSDTRedeem (event: Redeem): void{
+    let musdtRedeem = new mUSDTRedeem(event.transaction.hash.toHex())
+    let contract = mUSDT.bind(event.address)
+    musdtRedeem.redeemerAddress = event.params.redeemer
+    musdtRedeem.recipientAddress = event.params.recipient
+    musdtRedeem.amountRedeemed = event.params.amount
+    musdtRedeem.tokenAddress = contract._address
+    musdtRedeem.symbol =  contract.symbol()
+    musdtRedeem.totalSupply = contract.totalSupply()
+    musdtRedeem.transactionDate = event.block.timestamp
+    musdtRedeem.transactionBlock = event.block.number
+    musdtRedeem.save() 
+}
+export function handleMUSDTTransfer (event: Transfer): void{
+    let musdtTrade = new mUSDTTransfer(event.transaction.hash.toHex())
+    let contract = mUSDT.bind(event.address)
+    musdtTrade.symbol =  contract.symbol()
+    musdtTrade.transferedFrom= event.params.from
+    musdtTrade.transferedTo = event.params.to
+    musdtTrade.amountTransfered = event.transaction.value
+    musdtTrade.transactionDate = event.block.timestamp
+    musdtTrade.transactionBlock = event.block.number
+    musdtTrade.save()
+}
+// //-----------------------------mUSDT end
+
+
 
 //-----------------------------mUSDK start
 // export function handleUSDKMint (event: Mint): void{
