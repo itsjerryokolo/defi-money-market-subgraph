@@ -284,7 +284,7 @@ export function handleMUSDTTransfer (event: Transfer): void{
 //-----------------------------mUSDK end
 
 
-//-----------------------------dmgGovernance
+//-----------------------------dmgGovernance starts
 export function handleProposalCreated (event: ProposalCreated): void{
       let governanceproposal = new governanceProposal(event.params.id.toHex())
       governanceproposal.title = event.params.title
@@ -304,3 +304,4 @@ export function handleVoteCast (event: VoteCast): void{
       vote.transactionDate = event.block.timestamp
       vote.save()
 }
+//-----------------------------dmgGovernance ends
