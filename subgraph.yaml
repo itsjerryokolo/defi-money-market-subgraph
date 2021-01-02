@@ -155,27 +155,4 @@ dataSources:
           handler: handleProposalCreated
         - event: VoteCast(address,uint256,bool,uint256)
           handler: handleVoteCast  
-      file: ./src/mapping.ts  
-  - kind: ethereum/contract
-    name: assetIntroducers
-    network: mainnet
-    source:
-      address: "0x22DA19b404F432D64e280c3c5712E52612b689Fd"
-      abi: assetIntroducers
-      startBlock: 11380188 
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      entities:
-        - governanceProposal
-        - Vote
-      abis:
-        - name: assetIntroducers
-          file: ./abis/assetIntroducers.json
-      eventHandlers:
-        - event: AdminChanged(address,address)
-          handler: handleAdminChanged
-        - event: Upgraded(indexed address)
-          handler: handleUpgraded
-      file: ./src/mapping.ts    
+      file: ./src/mapping.ts   
