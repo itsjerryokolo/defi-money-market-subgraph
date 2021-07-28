@@ -14,7 +14,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - dmgTransfer
+        - Dmg
       abis:
         - name: DMMToken
           file: ./abis/DMMToken.json
@@ -33,19 +33,17 @@ dataSources:
     network: mainnet
     source:
       address: "0x06301057D77D54B6e14c7FafFB11Ffc7Cab4eaa7"
-      abi: mDai
+      abi: mDAI
       startBlock: 9581643 
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - mDaiMint
-        - mDaiRedeem
-        - mDaiTransfer
+        - mDai
       abis:
-        - name: mDai
-          file: ./abis/mDai.json
+        - name: mDAI
+          file: ./abis/mDAI.json
       eventHandlers:
         - event: Mint(indexed address,indexed address,uint256)
           handler: handleMDAIMint
@@ -66,9 +64,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - mUSDCMint
-        - mUSDCRedeem
-        - mUSDCTransfer
+        - mUsdc
       abis:
         - name: mUSDC
           file: ./abis/mUSDC.json
@@ -92,9 +88,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - mETHMint
-        - mETHRedeem
-        - mETHTransfer
+        - mEth
       abis:
         - name: mETH
           file: ./abis/mETH.json
@@ -119,9 +113,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - mUSDTMint
-        - mUSDTRedeem
-        - mUSDTTransfer
+        - mUSDT
       abis:
         - name: mUSDT
           file: ./abis/mUSDT.json
@@ -145,7 +137,7 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - governanceProposal
+        - Governance
         - Vote
       abis:
         - name: dmgGovernance
